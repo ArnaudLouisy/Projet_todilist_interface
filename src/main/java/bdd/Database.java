@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private String url = "jdbc:mysql://localhost/cruduser_test?serverTimezone=UTC";
-    private String user = "root";
-    private String password = "";
+    private String url = "jdbc:mysql://localhost/todolist_interface?serverTimezone=UTC";
+    private String user = "todolist_interface";
+    private String password = "Todo_list";
 
     public Connection getConnection() {
 
