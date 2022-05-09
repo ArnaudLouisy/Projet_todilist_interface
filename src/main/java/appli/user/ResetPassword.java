@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.User;
-import repository.UserRepository;
+import repository.EmployéRepository;
 
 import java.util.Random;
 import java.util.Properties;
@@ -15,22 +15,12 @@ import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 public class ResetPassword {
     @FXML
@@ -53,8 +43,8 @@ public class ResetPassword {
 
     @FXML
     void sendEmailAction(ActionEvent event) {
-        UserRepository userRepository = new UserRepository();
-        userSelected = userRepository.getUserByMail(fldMail.getText());
+        EmployéRepository employéRepository = new EmployéRepository();
+        userSelected = employéRepository.getUserByMail(fldMail.getText());
         if (userSelected != null){
             //email
             Random rand = new Random();

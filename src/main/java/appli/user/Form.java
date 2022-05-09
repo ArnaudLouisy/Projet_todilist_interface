@@ -10,7 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import modele.User;
-import repository.UserRepository;
+import repository.EmployéRepository;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -65,12 +65,12 @@ public class Form implements Initializable {
 
     @FXML
     void SaveAction(ActionEvent event) {
-        UserRepository userRepository = new UserRepository();
+        EmployéRepository employéRepository = new EmployéRepository();
         if(user == null){
             if (fldConfirmer.getText().equals(fldMotDePasse.getText())){
                 user = new User(fldNom.getText(),fldPrenom.getText(),fldMail.getText(),fldMotDePasse.getText(),rbtnAdmin.isSelected());
                 try {
-                    userRepository.sauvegarder(user);
+                    employéRepository.sauvegarder(user);
                     StartApplication.changeScene("/appli/user/Accueil",new Accueil(this.userConnecte));
 
                 } catch (SQLException e) {
@@ -86,7 +86,7 @@ public class Form implements Initializable {
             this.user.setMail(fldMail.getText());
             this.user.setEstAdmin(rbtnAdmin.isSelected());
             try {
-                userRepository.sauvegarder(user);
+                employéRepository.sauvegarder(user);
                 if(user.getIdUser() == this.userConnecte.getIdUser()){
                     StartApplication.changeScene("/appli/user/Accueil",new Accueil(this.user));
 

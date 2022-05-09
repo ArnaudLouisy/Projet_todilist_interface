@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import modele.User;
-import repository.UserRepository;
+import repository.EmployéRepository;
 
 import java.sql.SQLException;
 
@@ -35,12 +35,12 @@ public class Password {
 
     @FXML
     void SaveAction(ActionEvent event) throws SQLException {
-        UserRepository userRepository = new UserRepository();
+        EmployéRepository employéRepository = new EmployéRepository();
         if (fldConfirmer.getText().equals(fldMotDePasse.getText())){
             this.userConnecte.setMdp(fldMotDePasse.getText());
             System.out.println(fldMotDePasse.getText());
             System.out.println(this.userConnecte);
-            userRepository.changePassword(this.userConnecte);
+            employéRepository.changePassword(this.userConnecte);
             if (this.estConnecte)
                 StartApplication.changeScene("/appli/user/Accueil",new Accueil(this.userConnecte));
             else

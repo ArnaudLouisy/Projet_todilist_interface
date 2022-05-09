@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.User;
-import repository.UserRepository;
+import repository.EmployéRepository;
 
 import java.sql.SQLException;
 
@@ -36,11 +36,11 @@ public class Register {
 
     @FXML
     void registerAction(ActionEvent event) {
-        UserRepository userRepository = new UserRepository();
+        EmployéRepository employéRepository = new EmployéRepository();
         if (fldConfirmer.getText().equals(fldMotDePasse.getText())){
             User u = new User(fldNom.getText(),fldPrenom.getText(),fldMail.getText(),fldMotDePasse.getText(),false);
             try {
-                u = userRepository.sauvegarder(u);
+                u = employéRepository.sauvegarder(u);
                 StartApplication.changeScene("/appli/user/login");
 
             } catch (SQLException e) {

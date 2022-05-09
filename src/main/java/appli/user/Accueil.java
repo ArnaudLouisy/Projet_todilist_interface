@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import modele.User;
-import repository.UserRepository;
+import repository.EmployéRepository;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -51,9 +51,9 @@ public class Accueil implements Initializable {
             myTable.setCellValueFactory(new PropertyValueFactory<User,String>(colonnes[i][1]));
             tbl.getColumns().add(myTable);
         }
-        UserRepository userRepository = new UserRepository();
+        EmployéRepository employéRepository = new EmployéRepository();
 
-        tbl.getItems().addAll(userRepository.getUsers());
+        tbl.getItems().addAll(employéRepository.getUsers());
 
         if (!this.user.isEstAdmin()){
             btnAdd.setDisable(true);
@@ -68,8 +68,8 @@ public class Accueil implements Initializable {
     void delAction(ActionEvent event) throws SQLException {
         Optional<ButtonType> resultat = StartApplication.validationDialog("Supression d'un utilisateur","êtes-vous sûr de vouloir supprimer l'utilisateur : "+this.userSelected);
         if (resultat.get() == ButtonType.OK){
-            UserRepository userRepository = new UserRepository();
-            userRepository.deleteUser(this.userSelected);
+            EmployéRepository employéRepository = new EmployéRepository();
+            employéRepository.deleteUser(this.userSelected);
             if (this.userSelected.getIdUser() == this.user.getIdUser()){
                 StartApplication.changeScene("/appli/user/login");
             }else{

@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.User;
-import repository.UserRepository;
+import repository.EmployéRepository;
 
 public class LoginController {
 
@@ -34,8 +34,8 @@ public class LoginController {
     void seConnecterAction(ActionEvent event) {
         System.out.println(fldEmail.getText());
         System.out.println(fldMotDePasse.getText());
-        UserRepository userRepository = new UserRepository();
-        User u = userRepository.connexion(fldEmail.getText(),fldMotDePasse.getText());
+        EmployéRepository employéRepository = new EmployéRepository();
+        User u = employéRepository.connexion(fldEmail.getText(),fldMotDePasse.getText());
         if(u != null){
             StartApplication.changeScene("/appli/user/accueil",new Accueil(u));
             System.out.println("User connecte");

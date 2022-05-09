@@ -9,26 +9,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class UserRepository {
+public class EmployéRepository {
     private Database coBdd;
     private String table = "User";
 
-    public UserRepository() {
+    public EmployéRepository() {
         coBdd = new Database();
     }
 
-    public User sauvegarder(User user) throws SQLException {
+    public User sauvegarder(User employé) throws SQLException {
         String sql;
         PreparedStatement pstm;
 //Update
-        if(user.getIdUser()>0) {
+        if(employé.getIdUser()>0) {
             sql = "UPDATE `"+table+"` SET `nom`=?,`prenom`=?,`mail`=?,`est_admin`=? WHERE id_user=?";
             pstm = coBdd.getConnection().prepareStatement(sql);
-            pstm.setString(1, user.getNom());
-            pstm.setString(2, user.getPrenom());
-            pstm.setString(3, user.getMail());
-            pstm.setBoolean(4, user.isEstAdmin());
-            pstm.setInt(5, user.getIdUser());
+            pstm.setString(1, employé.getNom());
+            pstm.setString(2, employé.getPrenom());
+            pstm.setString(3, employé.getMail());
+            pstm.setBoolean(4, employé.isEstAdmin());
+            pstm.setInt(5, employé.getIdUser());
             pstm.executeUpdate();
 
         }
@@ -37,22 +37,22 @@ public class UserRepository {
             sql = "INSERT INTO `"+table+"`( `nom`, `prenom`, `mail`,`mdp`,`est_admin`) VALUES (?,?,?,md5(?),?)";
 
             pstm = coBdd.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pstm.setString(1, user.getNom());
-            pstm.setString(2, user.getPrenom());
-            pstm.setString(3, user.getMail());
-            pstm.setString(4, user.getMdp());
-            pstm.setBoolean(5, user.isEstAdmin());
+            pstm.setString(1, employé.getNom());
+            pstm.setString(2, employé.getPrenom());
+            pstm.setString(3, employé.getMail());
+            pstm.setString(4, employé.getMdp());
+            pstm.setBoolean(5, employé.isEstAdmin());
             pstm.executeUpdate();
             ResultSet rs = pstm.getGeneratedKeys();
             if(rs.next())
             {
                 int last_inserted_id = rs.getInt(1);
-                user.setIdUser(last_inserted_id);
+                employé.setIdUser(last_inserted_id);
             }
 
         }
 
-        return user;
+        return employé;
     }
     public ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<User>();
